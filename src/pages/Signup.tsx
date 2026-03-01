@@ -1,26 +1,31 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Flame, ArrowRight, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { signUp } from '@/lib/auth';
-import { toast } from 'sonner';
-import { logError } from '@/lib/logger';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Flame, ArrowRight, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { signUp } from "@/lib/auth";
+import { toast } from "sonner";
+import { logError } from "@/lib/logger";
 
-const signupSchema = z.object({
-  fullName: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres').max(100),
-  email: z.string().email('E-mail inválido').max(255),
-  password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres'),
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'As senhas não coincidem',
-  path: ['confirmPassword'],
-});
+const signupSchema = z
+  .object({
+    fullName: z
+      .string()
+      .min(2, "Nome deve ter pelo menos 2 caracteres")
+      .max(100),
+    email: z.string().email("E-mail inválido").max(255),
+    password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas não coincidem",
+    path: ["confirmPassword"],
+  });
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
@@ -44,14 +49,16 @@ export default function Signup() {
         password: data.password,
         fullName: data.fullName,
       });
-      toast.success('Conta criada! Verifique seu e-mail para confirmar o cadastro.');
-      navigate('/login');
+      toast.success(
+        "Conta criada! Verifique seu e-mail para confirmar o cadastro.",
+      );
+      navigate("/login");
     } catch (error: any) {
-      logError('Signup', error);
-      if (error.message?.includes('User already registered')) {
-        toast.error('Este e-mail já está cadastrado');
+      logError("Signup", error);
+      if (error.message?.includes("User already registered")) {
+        toast.error("Este e-mail já está cadastrado");
       } else {
-        toast.error('Erro ao criar conta. Tente novamente.');
+        toast.error("Erro ao criar conta. Tente novamente.");
       }
     } finally {
       setIsLoading(false);
@@ -71,20 +78,26 @@ export default function Signup() {
           >
             <motion.div
               className="w-32 h-40 mx-auto mb-8 bg-gradient-to-b from-cream/90 to-cream/70 rounded-lg relative"
-              style={{ borderRadius: '10% 10% 50% 50% / 5% 5% 50% 50%' }}
+              style={{ borderRadius: "10% 10% 50% 50% / 5% 5% 50% 50%" }}
             >
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-0.5 h-4 bg-wick" />
               <motion.div
-                className="absolute -top-12 left-1/2 -translate-x-1/2 w-6 h-10"
-                animate={{ scale: [1, 1.1, 0.9, 1], opacity: [0.9, 1, 0.8, 0.9] }}
+                className="absolute -top-[3.55rem] left-[3.20rem] -translate-x-1/2 w-6 h-10"
+                animate={{
+                  scale: [1, 1.1, 0.9, 1],
+                  opacity: [0.9, 1, 0.8, 0.9],
+                }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
                 <div className="w-full h-full bg-gradient-to-t from-amber via-gold-light to-transparent rounded-full blur-sm" />
               </motion.div>
             </motion.div>
-            <h2 className="text-3xl font-serif mb-4">Bem-vindo à Flaré</h2>
-            <p className="text-primary-foreground/80 max-w-sm mx-auto">
-              Crie sua conta e descubra nossa coleção exclusiva de velas artesanais.
+            <h2 className="text-3xl text-muted-foreground font-serif mb-5">
+              Bem-vindo à Flaré
+            </h2>
+            <p className="text-muted-foreground max-w-sm mx-auto">
+              Crie sua conta e descubra nossa coleção exclusiva de velas
+              artesanais.
             </p>
           </motion.div>
         </div>
@@ -109,7 +122,10 @@ export default function Signup() {
           className="mx-auto w-full max-w-sm lg:max-w-md"
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 mb-8 group">
+          <Link
+            to="/"
+            className="flex items-center gap-2 mb-8 group"
+          >
             <Flame className="h-8 w-8 text-amber" />
             <span className="font-serif text-2xl font-medium">Flaré</span>
           </Link>
@@ -121,18 +137,23 @@ export default function Signup() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-5"
+          >
             <div className="space-y-2">
               <Label htmlFor="fullName">Nome completo</Label>
               <Input
                 id="fullName"
                 type="text"
                 placeholder="Seu nome"
-                {...register('fullName')}
-                className={errors.fullName ? 'border-destructive' : ''}
+                {...register("fullName")}
+                className={errors.fullName ? "border-destructive" : ""}
               />
               {errors.fullName && (
-                <p className="text-sm text-destructive">{errors.fullName.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.fullName.message}
+                </p>
               )}
             </div>
 
@@ -142,11 +163,13 @@ export default function Signup() {
                 id="email"
                 type="email"
                 placeholder="seu@email.com"
-                {...register('email')}
-                className={errors.email ? 'border-destructive' : ''}
+                {...register("email")}
+                className={errors.email ? "border-destructive" : ""}
               />
               {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
@@ -156,11 +179,13 @@ export default function Signup() {
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                {...register('password')}
-                className={errors.password ? 'border-destructive' : ''}
+                {...register("password")}
+                className={errors.password ? "border-destructive" : ""}
               />
               {errors.password && (
-                <p className="text-sm text-destructive">{errors.password.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.password.message}
+                </p>
               )}
             </div>
 
@@ -170,15 +195,22 @@ export default function Signup() {
                 id="confirmPassword"
                 type="password"
                 placeholder="••••••••"
-                {...register('confirmPassword')}
-                className={errors.confirmPassword ? 'border-destructive' : ''}
+                {...register("confirmPassword")}
+                className={errors.confirmPassword ? "border-destructive" : ""}
               />
               {errors.confirmPassword && (
-                <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.confirmPassword.message}
+                </p>
               )}
             </div>
 
-            <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full"
+              size="lg"
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -195,12 +227,18 @@ export default function Signup() {
 
           <div className="mt-6 text-center text-sm text-muted-foreground">
             <p>
-              Ao criar uma conta, você concorda com nossos{' '}
-              <Link to="/termos" className="text-amber hover:underline">
+              Ao criar uma conta, você concorda com nossos{" "}
+              <Link
+                to="/termos"
+                className="text-amber hover:underline"
+              >
                 Termos de Uso
-              </Link>{' '}
-              e{' '}
-              <Link to="/privacidade" className="text-amber hover:underline">
+              </Link>{" "}
+              e{" "}
+              <Link
+                to="/privacidade"
+                className="text-amber hover:underline"
+              >
                 Política de Privacidade
               </Link>
               .
@@ -209,8 +247,11 @@ export default function Signup() {
 
           <div className="mt-6 text-center">
             <p className="text-muted-foreground">
-              Já tem uma conta?{' '}
-              <Link to="/login" className="text-amber hover:underline font-medium">
+              Já tem uma conta?{" "}
+              <Link
+                to="/login"
+                className="text-amber hover:underline font-medium"
+              >
                 Fazer login
               </Link>
             </p>

@@ -7,7 +7,7 @@
    Aesthetic: Warm, elegant, sophisticated
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap");
 
 @layer base {
   :root {
@@ -63,11 +63,32 @@
     --wick: 30 25% 30%;
 
     /* Gradients */
-    --gradient-warm: linear-gradient(135deg, hsl(40 40% 95%) 0%, hsl(38 35% 88%) 100%);
-    --gradient-amber: linear-gradient(135deg, hsl(35 80% 45%) 0%, hsl(30 85% 35%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(42 85% 55%) 0%, hsl(35 80% 45%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(40 33% 98%) 0%, hsl(38 40% 92%) 50%, hsl(35 30% 85%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(40 30% 99%) 0%, hsl(38 35% 96%) 100%);
+    --gradient-warm: linear-gradient(
+      135deg,
+      hsl(40 40% 95%) 0%,
+      hsl(38 35% 88%) 100%
+    );
+    --gradient-amber: linear-gradient(
+      135deg,
+      hsl(35 80% 45%) 0%,
+      hsl(30 85% 35%) 100%
+    );
+    --gradient-gold: linear-gradient(
+      135deg,
+      hsl(42 85% 55%) 0%,
+      hsl(35 80% 45%) 100%
+    );
+    --gradient-hero: linear-gradient(
+      180deg,
+      hsl(40 33% 98%) 0%,
+      hsl(38 40% 92%) 50%,
+      hsl(35 30% 85%) 100%
+    );
+    --gradient-card: linear-gradient(
+      180deg,
+      hsl(40 30% 99%) 0%,
+      hsl(38 35% 96%) 100%
+    );
 
     /* Shadows */
     --shadow-sm: 0 2px 8px -2px hsl(30 20% 20% / 0.08);
@@ -131,11 +152,32 @@
     --honey: 40 65% 55%;
     --wick: 38 20% 70%;
 
-    --gradient-warm: linear-gradient(135deg, hsl(25 20% 8%) 0%, hsl(28 18% 12%) 100%);
-    --gradient-amber: linear-gradient(135deg, hsl(38 75% 55%) 0%, hsl(35 80% 45%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(42 80% 60%) 0%, hsl(38 75% 55%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(25 20% 8%) 0%, hsl(28 18% 10%) 50%, hsl(30 16% 14%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(25 18% 12%) 0%, hsl(28 16% 14%) 100%);
+    --gradient-warm: linear-gradient(
+      135deg,
+      hsl(25 20% 8%) 0%,
+      hsl(28 18% 12%) 100%
+    );
+    --gradient-amber: linear-gradient(
+      135deg,
+      hsl(38 75% 55%) 0%,
+      hsl(35 80% 45%) 100%
+    );
+    --gradient-gold: linear-gradient(
+      135deg,
+      hsl(42 80% 60%) 0%,
+      hsl(38 75% 55%) 100%
+    );
+    --gradient-hero: linear-gradient(
+      180deg,
+      hsl(25 20% 8%) 0%,
+      hsl(28 18% 10%) 50%,
+      hsl(30 16% 14%) 100%
+    );
+    --gradient-card: linear-gradient(
+      180deg,
+      hsl(25 18% 12%) 0%,
+      hsl(28 16% 14%) 100%
+    );
 
     --shadow-sm: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
     --shadow-md: 0 8px 24px -8px hsl(0 0% 0% / 0.4);
@@ -165,11 +207,16 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Outfit', sans-serif;
+    font-family: "Outfit", sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Cormorant Garamond", serif;
     @apply font-medium tracking-tight;
   }
 
@@ -208,23 +255,40 @@
   }
 
   .candle-glow::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -20%;
     left: 50%;
     transform: translateX(-50%);
     width: 60%;
     height: 40%;
-    background: radial-gradient(ellipse, hsl(var(--amber) / 0.3) 0%, transparent 70%);
+    background: radial-gradient(
+      ellipse,
+      hsl(var(--amber) / 0.3) 0%,
+      transparent 70%
+    );
     pointer-events: none;
     animation: flicker 3s ease-in-out infinite;
   }
 
   @keyframes flicker {
-    0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
-    25% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
-    50% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
-    75% { opacity: 0.7; transform: translateX(-50%) scale(1.02); }
+    0%,
+    100% {
+      opacity: 0.6;
+      transform: translateX(-50%) scale(1);
+    }
+    25% {
+      opacity: 0.8;
+      transform: translateX(-50%) scale(1.05);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateX(-50%) scale(0.95);
+    }
+    75% {
+      opacity: 0.7;
+      transform: translateX(-50%) scale(1.02);
+    }
   }
 
   /* Elegant Divider */
@@ -234,7 +298,7 @@
 
   .elegant-divider::before,
   .elegant-divider::after {
-    content: '';
+    content: "";
     @apply flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent;
   }
 
@@ -273,7 +337,7 @@
   }
 
   .shimmer::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -289,7 +353,9 @@
   }
 
   @keyframes shimmer {
-    100% { left: 100%; }
+    100% {
+      left: 100%;
+    }
   }
 
   /* Form Styles */
@@ -310,7 +376,7 @@
   }
 
   .btn-shine::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -346,8 +412,14 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Stagger Children */
@@ -356,12 +428,24 @@
     opacity: 0;
   }
 
-  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
-  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+  .stagger-children > *:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .stagger-children > *:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .stagger-children > *:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .stagger-children > *:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .stagger-children > *:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  .stagger-children > *:nth-child(6) {
+    animation-delay: 0.6s;
+  }
 }
 
 @layer utilities {
