@@ -22,7 +22,7 @@ export function Footer() {
               <a href="https://instagram.com/velas.flare" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-amber transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://wa.me/5571992465937" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-amber transition-colors">
+              <a href="https://wa.me/557192465937" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-amber transition-colors">
                 <MessageCircle className="h-5 w-5" />
               </a>
               <a href="mailto:flores.frondosas@gmail.com" className="text-muted-foreground hover:text-amber transition-colors">
