@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Flame, Instagram, Facebook, Mail } from 'lucide-react';
+import { Flame, Instagram, Mail } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -19,13 +19,10 @@ export function Footer() {
               Transforme sua casa em um refúgio de paz e bem-estar.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-amber transition-colors">
+              <a href="https://instagram.com/flores.frondosas" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-amber transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-amber transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-amber transition-colors">
+              <a href="mailto:flores.frondosas@gmail.com" className="text-muted-foreground hover:text-amber transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>
@@ -78,8 +75,13 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/privacidade" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/privacidade" className="text-muted-foreground hover:text-foreground transition-colors">
                   Privacidade
+                </Link>
+              </li>
+              <li>
+                <Link to="/termos" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Termos de Uso
                 </Link>
               </li>
             </ul>
