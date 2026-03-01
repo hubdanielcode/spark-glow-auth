@@ -1,8 +1,14 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -57,7 +63,6 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Luxury palette
         amber: {
           DEFAULT: "hsl(var(--amber))",
           light: "hsl(var(--amber-light))",
@@ -83,11 +88,11 @@ export default {
         wick: "hsl(var(--wick))",
       },
       boxShadow: {
-        'card': 'var(--shadow-card)',
-        'glow': 'var(--shadow-glow)',
-        'luxury-sm': 'var(--shadow-sm)',
-        'luxury-md': 'var(--shadow-md)',
-        'luxury-lg': 'var(--shadow-lg)',
+        card: "var(--shadow-card)",
+        glow: "var(--shadow-glow)",
+        "luxury-sm": "var(--shadow-sm)",
+        "luxury-md": "var(--shadow-md)",
+        "luxury-lg": "var(--shadow-lg)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -96,20 +101,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -118,5 +115,7 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+  plugins: [tailwindcssAnimate], // <- plugin importado via ESModule
+};
+
+export default config;

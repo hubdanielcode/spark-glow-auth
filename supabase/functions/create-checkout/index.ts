@@ -4,7 +4,8 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 interface CartItem {
@@ -33,24 +34,32 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const supabaseClient = createClient(
-    Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_ANON_KEY") ?? ""
-  );
+  const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+  const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY");
+
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    throw new Error("Missing Supabase environment variables");
+  }
+
+  const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   try {
     // Get authenticated user
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("No authorization header provided");
-    
-    const token = authHeader.replace("Bearer ", "");
-    const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
-    
-    const user = userData.user;
-    if (!user?.email) throw new Error("User not authenticated or email not available");
 
-    const { items, shipping_cost, shipping_address }: CheckoutRequest = await req.json();
+    const token = authHeader.replace("Bearer ", "");
+    const { data: userData, error: userError } =
+      await supabaseClient.auth.getUser(token);
+    if (userError)
+      throw new Error(`Authentication error: ${userError.message}`);
+
+    const user = userData.user;
+    if (!user?.email)
+      throw new Error("User not authenticated or email not available");
+
+    const { items, shipping_cost, shipping_address }: CheckoutRequest =
+      await req.json();
 
     if (!items || items.length === 0) {
       throw new Error("Cart is empty");
@@ -62,24 +71,29 @@ serve(async (req) => {
     });
 
     // Check if customer exists
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
+    const customers = await stripe.customers.list({
+      email: user.email,
+      limit: 1,
+    });
     let customerId: string | undefined;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
     }
 
     // Create line items from cart
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item) => ({
-      price_data: {
-        currency: "brl",
-        product_data: {
-          name: item.name,
-          images: item.image_url ? [item.image_url] : [],
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(
+      (item) => ({
+        price_data: {
+          currency: "brl",
+          product_data: {
+            name: item.name,
+            images: item.image_url ? [item.image_url] : [],
+          },
+          unit_amount: Math.round(item.price * 100), // Convert to cents
         },
-        unit_amount: Math.round(item.price * 100), // Convert to cents
-      },
-      quantity: item.quantity,
-    }));
+        quantity: item.quantity,
+      }),
+    );
 
     // Add shipping as a line item if > 0
     if (shipping_cost > 0) {
@@ -114,13 +128,17 @@ serve(async (req) => {
       },
     });
 
-    return new Response(JSON.stringify({ url: session.url, session_id: session.id }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+    return new Response(
+      JSON.stringify({ url: session.url, session_id: session.id }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      },
+    );
   } catch (error) {
     console.error("Checkout error:", error);
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     return new Response(JSON.stringify({ error: errorMessage }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
