@@ -12,8 +12,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'contato@flare.com.br',
-    href: 'mailto:contato@flare.com.br',
+    value: 'flores.frondosas@gmail.com',
+    href: 'mailto:flores.frondosas@gmail.com',
   },
   {
     icon: Phone,
@@ -221,8 +221,8 @@ export default function Contact() {
                 Antes de entrar em contato, confira se sua dúvida já foi respondida 
                 em nossa seção de perguntas frequentes.
               </p>
-              <Button variant="outline" size="sm" className="border-amber/30 hover:bg-amber/10">
-                Ver FAQ
+              <Button variant="outline" size="sm" className="border-amber/30 hover:bg-amber/10" asChild>
+                <a href="/faq">Ver FAQ</a>
               </Button>
             </div>
           </motion.div>

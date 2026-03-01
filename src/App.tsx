@@ -24,6 +24,8 @@ import FAQ from "./pages/FAQ";
 import DeliveryPolicy from "./pages/DeliveryPolicy";
 import ReturnsPolicy from "./pages/ReturnsPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
+import ForgotPassword from "./pages/ForgotPassword";
 
 // Admin
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -58,6 +60,8 @@ const App = () => (
               <Route path="/entrega" element={<DeliveryPolicy />} />
               <Route path="/trocas" element={<ReturnsPolicy />} />
               <Route path="/privacidade" element={<PrivacyPolicy />} />
+              <Route path="/termos" element={<TermsOfUse />} />
+              <Route path="/esqueci-senha" element={<ForgotPassword />} />
               
               {/* Admin Routes */}
               <Route path="/admin" element={<AdminLayout />}>
