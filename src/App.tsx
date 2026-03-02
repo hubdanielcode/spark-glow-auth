@@ -20,6 +20,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import MyOrders from "./pages/MyOrders";
+import MyAccount from "./pages/MyAccount";
 import NotFound from "./pages/NotFound";
 import FAQ from "./pages/FAQ";
 import DeliveryPolicy from "./pages/DeliveryPolicy";
@@ -34,6 +35,7 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminOrders from "./pages/admin/AdminOrders";
+import AdminCustomers from "./pages/admin/AdminCustomers";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +61,7 @@ const App = () => (
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/checkout/success" element={<CheckoutSuccess />} />
               <Route path="/meus-pedidos" element={<MyOrders />} />
+              <Route path="/minha-conta" element={<MyAccount />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/entrega" element={<DeliveryPolicy />} />
               <Route path="/trocas" element={<ReturnsPolicy />} />
@@ -72,6 +75,7 @@ const App = () => (
                 <Route index element={<AdminDashboard />} />
                 <Route path="produtos" element={<AdminProducts />} />
                 <Route path="pedidos" element={<AdminOrders />} />
+                <Route path="clientes" element={<AdminCustomers />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />
