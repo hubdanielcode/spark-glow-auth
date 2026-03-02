@@ -27,6 +27,7 @@ import ReturnsPolicy from "./pages/ReturnsPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 // Admin
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -64,6 +65,7 @@ const App = () => (
               <Route path="/privacidade" element={<PrivacyPolicy />} />
               <Route path="/termos" element={<TermsOfUse />} />
               <Route path="/esqueci-senha" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               
               {/* Admin Routes */}
               <Route path="/admin" element={<AdminLayout />}>
