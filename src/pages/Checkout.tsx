@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { CreditCard, Truck, Loader2, ArrowLeft } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -34,7 +35,26 @@ export default function Checkout() {
   const { items, subtotal } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const shippingCost = subtotal >= 200 ? 0 : 15;
+  // Fetch shipping settings from database
+  const { data: shippingSettings } = useQuery({
+    queryKey: ['store-settings', 'shipping'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('store_settings' as any)
+        .select('value')
+        .eq('key', 'shipping')
+        .single();
+      if (error) return { free_shipping_threshold: 199, default_shipping_cost: 15, estimated_days_min: 3, estimated_days_max: 7 };
+      return (data as any).value as { free_shipping_threshold: number; default_shipping_cost: number; estimated_days_min: number; estimated_days_max: number };
+    },
+  });
+
+  const freeThreshold = shippingSettings?.free_shipping_threshold ?? 199;
+  const defaultShippingCost = shippingSettings?.default_shipping_cost ?? 15;
+  const daysMin = shippingSettings?.estimated_days_min ?? 3;
+  const daysMax = shippingSettings?.estimated_days_max ?? 7;
+
+  const shippingCost = subtotal >= freeThreshold ? 0 : defaultShippingCost;
   const total = subtotal + shippingCost;
 
   const {
@@ -286,6 +306,15 @@ export default function Checkout() {
                         <span>R$ {shippingCost.toFixed(2).replace('.', ',')}</span>
                       )}
                     </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Prazo estimado</span>
+                      <span>{daysMin}–{daysMax} dias úteis</span>
+                    </div>
+                    {shippingCost > 0 && (
+                      <p className="text-xs text-muted-foreground">
+                        Frete grátis a partir de R$ {freeThreshold.toFixed(2).replace('.', ',')}
+                      </p>
+                    )}
                   </div>
 
                   <Separator className="my-4" />
