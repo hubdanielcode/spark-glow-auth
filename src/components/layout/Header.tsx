@@ -107,25 +107,25 @@ export function Header() {
                     <p className="text-muted-foreground text-xs">{user.email}</p>
                   </div>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => navigate('/minha-conta')}>
+                  <DropdownMenuItem className="cursor-pointer" onClick={() => navigate('/minha-conta')}>
                     <User className="h-4 w-4 mr-2" />
                     Minha Conta
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/meus-pedidos')}>
+                  <DropdownMenuItem className="cursor-pointer" onClick={() => navigate('/meus-pedidos')}>
                     <ShoppingBag className="h-4 w-4 mr-2" />
                     Meus Pedidos
                   </DropdownMenuItem>
                   {isAdmin && (
                     <>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => navigate('/admin')}>
+                      <DropdownMenuItem className="cursor-pointer" onClick={() => navigate('/admin')}>
                         <Settings className="h-4 w-4 mr-2" />
                         Admin
                       </DropdownMenuItem>
                     </>
                   )}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut}>
+                  <DropdownMenuItem className="cursor-pointer" onClick={handleSignOut}>
                     <LogOut className="h-4 w-4 mr-2" />
                     Sair
                   </DropdownMenuItem>

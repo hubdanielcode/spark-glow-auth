@@ -64,11 +64,11 @@ export default function AdminOrders() {
   const { data: orders, isLoading } = useQuery({
     queryKey: ['admin-orders'],
     queryFn: async () => {
+      // First fetch orders
       const { data, error } = await supabase
         .from('orders')
         .select(`
           id, status, total, created_at, user_id,
-          profiles!orders_user_id_fkey (full_name),
           order_items (
             id, quantity, unit_price,
             products (name)
@@ -78,13 +78,16 @@ export default function AdminOrders() {
 
       if (error) throw error;
 
-      // Get user emails
+      // Fetch profiles separately to avoid FK join issues
       const userIds = [...new Set((data || []).map(o => o.user_id))];
-      const { data: authUsers } = await supabase.auth.admin.listUsers();
-      
-      const emailMap = new Map<string, string>();
-      // Note: In production, you'd use a server-side function for this
-      // For now, we'll show the profile name
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('user_id, full_name')
+        .in('user_id', userIds);
+
+      const profileMap = new Map(
+        (profiles || []).map(p => [p.user_id, p.full_name])
+      );
 
       return (data || []).map((o: any): Order => ({
         id: o.id,
@@ -93,7 +96,7 @@ export default function AdminOrders() {
         createdAt: o.created_at,
         user: {
           email: o.user_id.slice(0, 8) + '...',
-          fullName: o.profiles?.full_name,
+          fullName: profileMap.get(o.user_id) || null,
         },
         items: (o.order_items || []).map((item: any) => ({
           id: item.id,
