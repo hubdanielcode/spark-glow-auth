@@ -12,7 +12,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <img src={logoImg} alt="Flaré" className="h-7 w-7 rounded-full object-cover" />
+              <img src={logoImg} alt="Flaré" className="h-7 w-7 object-contain" />
               <span className="font-serif text-xl font-medium">Flaré</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">

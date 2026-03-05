@@ -86,7 +86,7 @@ export default function AdminLayout() {
           {/* Logo */}
           <div className="p-6 border-b border-border">
             <Link to="/admin" className="flex items-center gap-2">
-              <img src={logoImg} alt="Flaré" className="h-7 w-7 rounded-full object-cover" />
+              <img src={logoImg} alt="Flaré" className="h-7 w-7 object-contain" />
               <span className="font-serif text-xl font-medium">Flaré</span>
               <span className="text-xs bg-amber/10 text-amber px-2 py-0.5 rounded-full">
                 Admin
@@ -163,7 +163,7 @@ export default function AdminLayout() {
               <Menu className="h-5 w-5" />
             </Button>
             <Link to="/admin" className="flex items-center gap-2">
-              <img src={logoImg} alt="Flaré" className="h-6 w-6 rounded-full object-cover" />
+              <img src={logoImg} alt="Flaré" className="h-6 w-6 object-contain" />
               <span className="font-serif text-lg font-medium">Admin</span>
             </Link>
           </div>
