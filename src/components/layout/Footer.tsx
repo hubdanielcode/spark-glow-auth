@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Flame, Instagram, Mail, MessageCircle } from 'lucide-react';
+import { Instagram, Mail, MessageCircle } from 'lucide-react';
+import logoImg from '@/assets/logo.png';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -11,7 +12,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <Flame className="h-7 w-7 text-amber" />
+              <img src={logoImg} alt="Flaré" className="h-7 w-7 rounded-full object-cover" />
               <span className="font-serif text-xl font-medium">Flaré</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
