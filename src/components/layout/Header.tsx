@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, User, Menu, X, Flame, LogOut, Settings } from 'lucide-react';
+import { ShoppingBag, User, Menu, X, LogOut, Settings } from 'lucide-react';
+import logoImg from '@/assets/logo.png';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
@@ -43,7 +44,7 @@ export function Header() {
               whileHover={{ scale: 1.05 }}
               className="relative"
             >
-              <Flame className="h-8 w-8 text-amber" />
+              <img src={logoImg} alt="Flaré" className="h-10 w-10 rounded-full object-cover" />
               <motion.div
                 className="absolute inset-0 bg-amber/20 blur-xl rounded-full"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
