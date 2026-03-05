@@ -158,7 +158,7 @@ export default function About() {
               href="/produtos"
               className="inline-flex items-center gap-2 px-8 py-3 bg-amber text-amber-foreground rounded-full font-medium hover:bg-amber-dark transition-colors"
             >
-              <img src={logoImg} alt="Flaré" className="h-5 w-5 rounded-full object-cover" />
+              <img src={logoImg} alt="Flaré" className="h-5 w-5 object-contain" />
               Explorar Coleção
             </a>
           </motion.div>

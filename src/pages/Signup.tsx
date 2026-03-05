@@ -127,7 +127,7 @@ export default function Signup() {
             to="/"
             className="flex items-center gap-2 mb-8 group"
           >
-            <img src={logoImg} alt="Flaré" className="h-8 w-8 rounded-full object-cover" />
+            <img src={logoImg} alt="Flaré" className="h-8 w-8 object-contain" />
             <span className="font-serif text-2xl font-medium">Flaré</span>
           </Link>
 

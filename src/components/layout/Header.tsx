@@ -44,7 +44,7 @@ export function Header() {
               whileHover={{ scale: 1.05 }}
               className="relative"
             >
-              <img src={logoImg} alt="Flaré" className="h-10 w-10 rounded-full object-cover" />
+              <img src={logoImg} alt="Flaré" className="h-10 w-10 object-contain" />
               <motion.div
                 className="absolute inset-0 bg-amber/20 blur-xl rounded-full"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}

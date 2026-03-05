@@ -86,7 +86,7 @@ export default function ResetPassword() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center space-y-4 max-w-md">
-          <img src={logoImg} alt="Flaré" className="h-12 w-12 rounded-full object-cover mx-auto" />
+          <img src={logoImg} alt="Flaré" className="h-12 w-12 object-contain mx-auto" />
           <h1 className="text-2xl font-serif font-medium">Link inválido ou expirado</h1>
           <p className="text-muted-foreground">
             O link de recuperação de senha é inválido ou já expirou. 
@@ -113,7 +113,7 @@ export default function ResetPassword() {
         className="w-full max-w-md"
       >
         <Link to="/" className="flex items-center gap-2 mb-8 justify-center">
-          <img src={logoImg} alt="Flaré" className="h-8 w-8 rounded-full object-cover" />
+          <img src={logoImg} alt="Flaré" className="h-8 w-8 object-contain" />
           <span className="font-serif text-2xl font-medium">Flaré</span>
         </Link>
 
