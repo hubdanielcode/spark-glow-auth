@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Flame, ArrowLeft, Loader2, Mail } from "lucide-react";
+import { ArrowLeft, Loader2, Mail } from "lucide-react";
+import logoImg from '@/assets/logo.png';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,7 +54,7 @@ export default function ForgotPassword() {
         className="w-full max-w-md"
       >
         <Link to="/" className="flex items-center gap-2 mb-8 justify-center">
-          <Flame className="h-8 w-8 text-amber" />
+          <img src={logoImg} alt="Flaré" className="h-8 w-8 rounded-full object-cover" />
           <span className="font-serif text-2xl font-medium">Flaré</span>
         </Link>
 

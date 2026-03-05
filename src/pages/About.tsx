@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
-import { Flame, Heart, Leaf, Award } from 'lucide-react';
+import { Heart, Leaf, Award } from 'lucide-react';
+import logoImg from '@/assets/logo.png';
 import { Layout } from '@/components/layout/Layout';
 
 const values = [
   {
-    icon: Flame,
+    icon: Heart,
     title: 'Artesanal',
     description: 'Cada vela é cuidadosamente feita à mão com atenção aos mínimos detalhes.',
   },
@@ -157,7 +158,7 @@ export default function About() {
               href="/produtos"
               className="inline-flex items-center gap-2 px-8 py-3 bg-amber text-amber-foreground rounded-full font-medium hover:bg-amber-dark transition-colors"
             >
-              <Flame className="h-5 w-5" />
+              <img src={logoImg} alt="Flaré" className="h-5 w-5 rounded-full object-cover" />
               Explorar Coleção
             </a>
           </motion.div>
