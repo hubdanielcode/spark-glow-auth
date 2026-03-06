@@ -221,6 +221,12 @@
     @apply font-medium tracking-tight;
   }
 
+  /* Corrige fundo claro residual da logo no tema escuro */
+  .dark img[src*="logo.png"] {
+    mix-blend-mode: multiply;
+    filter: brightness(1.08) contrast(1.08);
+  }
+
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
