@@ -455,12 +455,3 @@
     text-wrap: balance;
   }
 }
-
-/* Logo transparency - remove black background only in light mode */
-:root img[src*="logo.png"] {
-  mix-blend-mode: multiply;
-}
-
-.dark img[src*="logo.png"] {
-  mix-blend-mode: normal;
-}
