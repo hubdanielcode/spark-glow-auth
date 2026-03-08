@@ -221,7 +221,6 @@
     @apply font-medium tracking-tight;
   }
 
-
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
