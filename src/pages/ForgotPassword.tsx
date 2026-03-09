@@ -13,7 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const forgotSchema = z.object({
-  email: z.string().email("E-mail inválido"),
+  email: z.string().trim().email("E-mail inválido").max(255, "E-mail deve ter no máximo 255 caracteres"),
 });
 
 type ForgotFormData = z.infer<typeof forgotSchema>;
