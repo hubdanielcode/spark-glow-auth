@@ -151,6 +151,7 @@ export default function Signup() {
               <Input
                 id="fullName"
                 type="text"
+                maxLength={100}
                 placeholder="Seu nome"
                 {...register("fullName")}
                 className={errors.fullName ? "border-destructive" : ""}
