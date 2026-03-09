@@ -1,27 +1,32 @@
-import { motion } from 'framer-motion';
-import { Flame, Heart, Leaf, Award } from 'lucide-react';
-import { Layout } from '@/components/layout/Layout';
+import { motion } from "framer-motion";
+import { Heart, Leaf, Award } from "lucide-react";
+import logoImg from "@/assets/logo-loja.png";
+import { Layout } from "@/components/layout/Layout";
 
 const values = [
   {
-    icon: Flame,
-    title: 'Artesanal',
-    description: 'Cada vela é cuidadosamente feita à mão com atenção aos mínimos detalhes.',
+    icon: Heart,
+    title: "Artesanal",
+    description:
+      "Cada vela é cuidadosamente feita à mão com atenção aos mínimos detalhes.",
   },
   {
     icon: Leaf,
-    title: 'Sustentável',
-    description: 'Utilizamos cera de soja 100% natural e pavios de algodão livre de metais.',
+    title: "Sustentável",
+    description:
+      "Utilizamos cera de soja 100% natural e pavios de algodão livre de metais.",
   },
   {
     icon: Heart,
-    title: 'Com Amor',
-    description: 'Colocamos paixão em cada etapa, desde a escolha das fragrâncias até a embalagem.',
+    title: "Com Amor",
+    description:
+      "Colocamos paixão em cada etapa, desde a escolha das fragrâncias até a embalagem.",
   },
   {
     icon: Award,
-    title: 'Qualidade Premium',
-    description: 'Selecionamos apenas os melhores ingredientes para garantir uma experiência única.',
+    title: "Qualidade Premium",
+    description:
+      "Selecionamos apenas os melhores ingredientes para garantir uma experiência única.",
   },
 ];
 
@@ -41,9 +46,9 @@ export default function About() {
               Nossa História
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              A Flaré nasceu de uma paixão por transformar momentos simples em experiências 
-              memoráveis. Acreditamos que a luz de uma vela tem o poder de criar atmosferas 
-              únicas e despertar emoções.
+              A Flaré nasceu de uma paixão por transformar momentos simples em
+              experiências memoráveis. Acreditamos que a luz de uma vela tem o
+              poder de criar atmosferas únicas e despertar emoções.
             </p>
           </motion.div>
         </div>
@@ -78,21 +83,23 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Fundada em 2020, a Flaré começou como um pequeno ateliê caseiro, 
-                  onde cada vela era criada com amor e dedicação. O que começou como 
-                  um hobby rapidamente se transformou em uma missão: levar luz, 
-                  fragrância e conforto para lares em todo o Brasil.
+                  Fundada em 2020, a Flaré começou como um pequeno ateliê
+                  caseiro, onde cada vela era criada com amor e dedicação. O que
+                  começou como um hobby rapidamente se transformou em uma
+                  missão: levar luz, fragrância e conforto para lares em todo o
+                  Brasil.
                 </p>
                 <p>
-                  Hoje, mantemos o mesmo cuidado artesanal de nossos primeiros dias, 
-                  mas com uma visão expandida. Cada vela Flaré é uma pequena obra de 
-                  arte, feita para transformar qualquer ambiente em um refúgio de 
-                  tranquilidade e beleza.
+                  Hoje, mantemos o mesmo cuidado artesanal de nossos primeiros
+                  dias, mas com uma visão expandida. Cada vela Flaré é uma
+                  pequena obra de arte, feita para transformar qualquer ambiente
+                  em um refúgio de tranquilidade e beleza.
                 </p>
                 <p>
-                  Nosso compromisso com a sustentabilidade guia cada decisão: desde 
-                  a escolha de cera de soja renovável até embalagens recicláveis, 
-                  acreditamos que luxo e responsabilidade ambiental caminham juntos.
+                  Nosso compromisso com a sustentabilidade guia cada decisão:
+                  desde a escolha de cera de soja renovável até embalagens
+                  recicláveis, acreditamos que luxo e responsabilidade ambiental
+                  caminham juntos.
                 </p>
               </div>
             </motion.div>
@@ -130,8 +137,12 @@ export default function About() {
                 <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-amber/10 flex items-center justify-center">
                   <value.icon className="h-7 w-7 text-amber" />
                 </div>
-                <h3 className="font-serif text-xl font-medium mb-2">{value.title}</h3>
-                <p className="text-sm text-muted-foreground">{value.description}</p>
+                <h3 className="font-serif text-xl font-medium mb-2">
+                  {value.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {value.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -157,7 +168,11 @@ export default function About() {
               href="/produtos"
               className="inline-flex items-center gap-2 px-8 py-3 bg-amber text-amber-foreground rounded-full font-medium hover:bg-amber-dark transition-colors"
             >
-              <Flame className="h-5 w-5" />
+              <img
+                src={logoImg}
+                alt="Flaré"
+                className="h-5 w-5 object-contain"
+              />
               Explorar Coleção
             </a>
           </motion.div>

@@ -12,10 +12,6 @@ const faqs = [
     a: "Nossas velas são feitas com cera de soja 100% natural, pavios de algodão ecológico e óleos essenciais puros. Não utilizamos parafina, corantes artificiais ou fragrâncias sintéticas.",
   },
   {
-    q: "Qual o tempo de queima das velas?",
-    a: "O tempo de queima varia de acordo com o tamanho da vela. Nossas velas pequenas duram aproximadamente 20 horas, as médias cerca de 40 horas e as grandes até 60 horas.",
-  },
-  {
     q: "Como devo cuidar da minha vela?",
     a: "Apare o pavio para aproximadamente 5mm antes de cada uso. Na primeira queima, deixe a vela acesa até que toda a superfície derreta uniformemente. Evite correntes de ar e nunca deixe a vela acesa sem supervisão.",
   },
@@ -52,9 +48,17 @@ const FAQ = () => {
           Tire suas dúvidas sobre nossos produtos e serviços
         </p>
 
-        <Accordion type="single" collapsible className="space-y-2">
+        <Accordion
+          type="single"
+          collapsible
+          className="space-y-2"
+        >
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border rounded-lg px-4">
+            <AccordionItem
+              key={i}
+              value={`item-${i}`}
+              className="border rounded-lg px-4"
+            >
               <AccordionTrigger className="text-left font-medium">
                 {faq.q}
               </AccordionTrigger>

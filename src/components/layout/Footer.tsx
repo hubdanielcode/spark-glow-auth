@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Flame, Instagram, Mail } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Link } from "react-router-dom";
+import { Instagram, Mail, MessageCircle } from "lucide-react";
+import logoImg from "@/assets/logo-loja.png";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export function Footer() {
   return (
@@ -10,19 +11,42 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <Flame className="h-7 w-7 text-amber" />
+            <Link
+              to="/"
+              className="flex items-center gap-2"
+            >
+              <img
+                src={logoImg}
+                alt="Flaré"
+                className="h-7 w-7 object-contain"
+              />
               <span className="font-serif text-xl font-medium">Flaré</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Velas artesanais feitas com amor e ingredientes naturais. 
+              Velas artesanais feitas com amor e ingredientes naturais.
               Transforme sua casa em um refúgio de paz e bem-estar.
             </p>
             <div className="flex gap-4">
-              <a href="https://instagram.com/flores.frondosas" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-amber transition-colors">
+              <a
+                href="https://instagram.com/velas.flare"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-amber transition-colors"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="mailto:flores.frondosas@gmail.com" className="text-muted-foreground hover:text-amber transition-colors">
+              <a
+                href="https://wa.me/557192465937"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-amber transition-colors"
+              >
+                <MessageCircle className="h-5 w-5" />
+              </a>
+              <a
+                href="mailto:flores.frondosas@gmail.com"
+                className="text-muted-foreground hover:text-amber transition-colors"
+              >
                 <Mail className="h-5 w-5" />
               </a>
             </div>
@@ -33,22 +57,34 @@ export function Footer() {
             <h4 className="font-serif text-lg font-medium mb-4">Navegação</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/produtos" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/produtos"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Produtos
                 </Link>
               </li>
               <li>
-                <Link to="/categorias" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/categorias"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Categorias
                 </Link>
               </li>
               <li>
-                <Link to="/sobre" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/sobre"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Sobre Nós
                 </Link>
               </li>
               <li>
-                <Link to="/contato" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/contato"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Contato
                 </Link>
               </li>
@@ -60,27 +96,42 @@ export function Footer() {
             <h4 className="font-serif text-lg font-medium mb-4">Ajuda</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/faq"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Perguntas Frequentes
                 </Link>
               </li>
               <li>
-                <Link to="/entrega" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/entrega"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Política de Entrega
                 </Link>
               </li>
               <li>
-                <Link to="/trocas" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/trocas"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Trocas e Devoluções
                 </Link>
               </li>
               <li>
-              <Link to="/privacidade" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/privacidade"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Privacidade
                 </Link>
               </li>
               <li>
-                <Link to="/termos" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/termos"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Termos de Uso
                 </Link>
               </li>
@@ -99,7 +150,10 @@ export function Footer() {
                 placeholder="seu@email.com"
                 className="bg-background"
               />
-              <Button type="submit" className="w-full">
+              <Button
+                type="submit"
+                className="w-full"
+              >
                 Inscrever-se
               </Button>
             </form>
@@ -107,7 +161,9 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Flaré. Todos os direitos reservados.</p>
+          <p>
+            © {new Date().getFullYear()} Flaré. Todos os direitos reservados.
+          </p>
         </div>
       </div>
     </footer>

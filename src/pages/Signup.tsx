@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Flame, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import logoImg from "@/assets/logo-loja.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -126,7 +127,11 @@ export default function Signup() {
             to="/"
             className="flex items-center gap-2 mb-8 group"
           >
-            <Flame className="h-8 w-8 text-amber" />
+            <img
+              src={logoImg}
+              alt="Flaré"
+              className="h-8 w-8 object-contain"
+            />
             <span className="font-serif text-2xl font-medium">Flaré</span>
           </Link>
 

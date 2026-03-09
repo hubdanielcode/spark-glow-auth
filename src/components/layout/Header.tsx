@@ -1,19 +1,20 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, User, Menu, X, Flame, LogOut, Settings } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
-import { useCart } from '@/contexts/CartContext';
-import { signOut } from '@/lib/auth';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingBag, User, Menu, X, LogOut, Settings } from "lucide-react";
+import logoImg from "@/assets/logo-loja.png";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
+import { signOut } from "@/lib/auth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,14 +24,14 @@ export function Header() {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/');
+    navigate("/");
   };
 
   const navLinks = [
-    { href: '/produtos', label: 'Produtos' },
-    { href: '/categorias', label: 'Categorias' },
-    { href: '/sobre', label: 'Sobre' },
-    { href: '/contato', label: 'Contato' },
+    { href: "/produtos", label: "Produtos" },
+    { href: "/categorias", label: "Categorias" },
+    { href: "/sobre", label: "Sobre" },
+    { href: "/contato", label: "Contato" },
   ];
 
   return (
@@ -38,12 +39,19 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link
+            to="/"
+            className="flex items-center gap-2 group"
+          >
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="relative"
             >
-              <Flame className="h-8 w-8 text-amber" />
+              <img
+                src={logoImg}
+                alt="Flaré"
+                className="h-10 w-10 object-contain"
+              />
               <motion.div
                 className="absolute inset-0 bg-amber/20 blur-xl rounded-full"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
@@ -79,7 +87,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="relative"
-              onClick={() => navigate('/carrinho')}
+              onClick={() => navigate("/carrinho")}
             >
               <ShoppingBag className="h-5 w-5" />
               {itemCount > 0 && (
@@ -97,35 +105,55 @@ export function Header() {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                  >
                     <User className="h-5 w-5" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuContent
+                  align="end"
+                  className="w-48"
+                >
                   <div className="px-2 py-1.5 text-sm">
-                    <p className="font-medium">{user.fullName || 'Usuário'}</p>
-                    <p className="text-muted-foreground text-xs">{user.email}</p>
+                    <p className="font-medium">{user.fullName || "Usuário"}</p>
+                    <p className="text-muted-foreground text-xs">
+                      {user.email}
+                    </p>
                   </div>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => navigate('/minha-conta')}>
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onClick={() => navigate("/minha-conta")}
+                  >
                     <User className="h-4 w-4 mr-2" />
                     Minha Conta
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/meus-pedidos')}>
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onClick={() => navigate("/meus-pedidos")}
+                  >
                     <ShoppingBag className="h-4 w-4 mr-2" />
                     Meus Pedidos
                   </DropdownMenuItem>
                   {isAdmin && (
                     <>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => navigate('/admin')}>
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => navigate("/admin")}
+                      >
                         <Settings className="h-4 w-4 mr-2" />
                         Admin
                       </DropdownMenuItem>
                     </>
                   )}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut}>
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onClick={handleSignOut}
+                  >
                     <LogOut className="h-4 w-4 mr-2" />
                     Sair
                   </DropdownMenuItem>
@@ -135,7 +163,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => navigate('/login')}
+                onClick={() => navigate("/login")}
                 className="hidden md:inline-flex"
               >
                 Entrar
@@ -149,7 +177,11 @@ export function Header() {
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -159,7 +191,7 @@ export function Header() {
           {isMobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden border-t border-border/50"
             >
@@ -179,7 +211,7 @@ export function Header() {
                     variant="default"
                     className="w-full mt-4"
                     onClick={() => {
-                      navigate('/login');
+                      navigate("/login");
                       setIsMobileMenuOpen(false);
                     }}
                   >

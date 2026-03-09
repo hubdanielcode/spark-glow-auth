@@ -1,20 +1,39 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Truck, Shield, Heart } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Layout } from '@/components/layout/Layout';
-import { ProductCard } from '@/components/products/ProductCard';
-import { useProducts, useCategories } from '@/hooks/useProducts';
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles, Truck, Shield, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Layout } from "@/components/layout/Layout";
+import { ProductCard } from "@/components/products/ProductCard";
+import { useProducts, useCategories } from "@/hooks/useProducts";
 
 export default function Index() {
-  const { data: featuredProducts, isLoading: productsLoading } = useProducts({ featured: true, limit: 4 });
+  const { data: featuredProducts, isLoading: productsLoading } = useProducts({
+    featured: true,
+    limit: 4,
+  });
   const { data: categories } = useCategories();
 
   const features = [
-    { icon: Sparkles, title: "100% Artesanal", desc: "Feitas à mão com ingredientes naturais" },
-    { icon: Truck, title: "Entrega Rápida", desc: "Enviamos para todo o Brasil" },
-    { icon: Shield, title: "Qualidade Premium", desc: "Garantia de satisfação" },
-    { icon: Heart, title: "Feito com Amor", desc: "Cada vela é única e especial" },
+    {
+      icon: Sparkles,
+      title: "100% Artesanal",
+      desc: "Feitas à mão com ingredientes naturais",
+    },
+    {
+      icon: Truck,
+      title: "Entrega Rápida",
+      desc: "Enviamos para todo o Brasil",
+    },
+    {
+      icon: Shield,
+      title: "Qualidade Premium",
+      desc: "Garantia de satisfação",
+    },
+    {
+      icon: Heart,
+      title: "Feito com Amor",
+      desc: "Cada vela é única e especial",
+    },
   ];
 
   return (
@@ -52,28 +71,34 @@ export default function Index() {
               >
                 ✨ Coleção Inverno 2026
               </motion.span>
-              
+
               <h1 className="text-display-lg md:text-display-xl font-serif mb-6 leading-tight">
-                Ilumine seus{' '}
-                <span className="text-gradient">momentos</span>
+                Ilumine seus <span className="text-gradient">momentos</span>
               </h1>
-              
+
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                Velas artesanais feitas com ingredientes naturais para transformar 
-                sua casa em um refúgio de paz e bem-estar.
+                Velas artesanais feitas com ingredientes naturais para
+                transformar sua casa em um refúgio de paz e bem-estar.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button asChild size="lg" className="btn-shine text-base px-8">
+                <Button
+                  asChild
+                  size="lg"
+                  className="btn-shine text-base px-8"
+                >
                   <Link to="/produtos">
                     Explorar Coleção
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="text-base px-8">
-                  <Link to="/sobre">
-                    Nossa História
-                  </Link>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="text-base px-8"
+                >
+                  <Link to="/sobre">Nossa História</Link>
                 </Button>
               </div>
 
@@ -94,7 +119,9 @@ export default function Index() {
                     <p className="text-2xl md:text-3xl font-serif font-medium text-amber">
                       {stat.value}
                     </p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {stat.label}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -114,27 +141,36 @@ export default function Index() {
                   animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
                   transition={{ duration: 4, repeat: Infinity }}
                 />
-                
+
                 {/* Candle Placeholder */}
                 <div className="relative w-64 h-80 md:w-80 md:h-96 bg-gradient-to-b from-cream to-cream-dark rounded-2xl shadow-luxury-lg flex items-center justify-center">
                   <div className="text-center">
                     <motion.div
                       className="w-24 h-32 mx-auto bg-gradient-to-b from-amber-light to-amber rounded-lg relative"
-                      style={{ borderRadius: '10% 10% 50% 50% / 5% 5% 50% 50%' }}
+                      style={{
+                        borderRadius: "10% 10% 50% 50% / 5% 5% 50% 50%",
+                      }}
                     >
                       {/* Wick */}
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-0.5 h-4 bg-wick" />
                       {/* Flame */}
                       <motion.div
                         className="absolute -top-10 left-1/2 -translate-x-1/2 w-4 h-8"
-                        animate={{ scale: [1, 1.1, 0.9, 1], opacity: [0.9, 1, 0.8, 0.9] }}
+                        animate={{
+                          scale: [1, 1.1, 0.9, 1],
+                          opacity: [0.9, 1, 0.8, 0.9],
+                        }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       >
                         <div className="w-full h-full bg-gradient-to-t from-amber via-gold-light to-transparent rounded-full blur-sm" />
                       </motion.div>
                     </motion.div>
-                    <p className="mt-6 font-serif text-lg text-foreground/80">Flaré</p>
-                    <p className="text-sm text-muted-foreground">Lavanda Provence</p>
+                    <p className="mt-6 font-serif text-lg text-foreground/80">
+                      Flaré
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Lavanda Provence
+                    </p>
                   </div>
                 </div>
               </div>
@@ -159,7 +195,9 @@ export default function Index() {
                 <div className="w-12 h-12 mx-auto rounded-full bg-amber/10 flex items-center justify-center mb-4">
                   <feature.icon className="h-6 w-6 text-amber" />
                 </div>
-                <h3 className="font-serif text-lg font-medium mb-1">{feature.title}</h3>
+                <h3 className="font-serif text-lg font-medium mb-1">
+                  {feature.title}
+                </h3>
                 <p className="text-sm text-muted-foreground">{feature.desc}</p>
               </motion.div>
             ))}
@@ -181,15 +219,18 @@ export default function Index() {
               Produtos em Destaque
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Descubra nossas velas mais amadas, cuidadosamente selecionadas para 
-              proporcionar momentos únicos de relaxamento e bem-estar.
+              Descubra nossas velas mais amadas, cuidadosamente selecionadas
+              para proporcionar momentos únicos de relaxamento e bem-estar.
             </p>
           </motion.div>
 
           {productsLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-cream rounded-lg animate-pulse">
+                <div
+                  key={i}
+                  className="bg-cream rounded-lg animate-pulse"
+                >
                   <div className="aspect-square bg-muted" />
                   <div className="p-4 space-y-3">
                     <div className="h-4 bg-muted rounded w-1/2" />
@@ -219,7 +260,11 @@ export default function Index() {
           )}
 
           <div className="text-center mt-12">
-            <Button asChild variant="outline" size="lg">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+            >
               <Link to="/produtos">
                 Ver Todos os Produtos
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -287,22 +332,22 @@ export default function Index() {
           <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white/10 blur-2xl" />
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white/10 blur-2xl" />
         </motion.div>
-        
+
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-display-sm md:text-display-md font-serif text-primary-foreground mb-4">
+            <h2 className="text-display-sm md:text-display-md font-serif text-black-foreground mb-4">
               Pronto para iluminar sua casa?
             </h2>
-            <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-muted-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
               Cadastre-se agora e ganhe 10% de desconto na sua primeira compra.
             </p>
-            <Button 
-              asChild 
-              size="lg" 
+            <Button
+              asChild
+              size="lg"
               variant="secondary"
               className="text-base px-8"
             >

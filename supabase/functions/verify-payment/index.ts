@@ -14,9 +14,7 @@ serve(async (req: Request): Promise<Response> => {
   }
 
   try {
-    /* =======================
-       ENV VALIDATION
-    ======================== */
+    // Env validation
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
     const SUPABASE_ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY");
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -31,9 +29,7 @@ serve(async (req: Request): Promise<Response> => {
       throw new Error("Missing required environment variables");
     }
 
-    /* =======================
-       AUTH VALIDATION
-    ======================== */
+    // Auth validation
     const authHeader = req.headers.get("Authorization");
     if (!authHeader?.startsWith("Bearer ")) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
@@ -64,9 +60,7 @@ serve(async (req: Request): Promise<Response> => {
       { auth: { persistSession: false } },
     );
 
-    /* =======================
-       REQUEST BODY
-    ======================== */
+    // Request body
     const body = await req.json();
     const { session_id, order_id } = body;
 
@@ -80,9 +74,7 @@ serve(async (req: Request): Promise<Response> => {
       );
     }
 
-    /* =======================
-       STRIPE
-    ======================== */
+    // Stripe
     const stripe = new Stripe(STRIPE_SECRET_KEY, {
       apiVersion: "2025-08-27.basil",
     });
