@@ -96,6 +96,7 @@ export default function Login() {
               <Input
                 id="email"
                 type="email"
+                maxLength={255}
                 placeholder="seu@email.com"
                 {...register("email")}
                 className={errors.email ? "border-destructive" : ""}
