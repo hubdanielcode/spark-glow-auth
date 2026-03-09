@@ -19,8 +19,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Navigate, Link } from "react-router-dom";
 
 const profileSchema = z.object({
-  fullName: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  phone: z.string().optional(),
+  fullName: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome deve ter no máximo 100 caracteres"),
+  phone: z.string().max(20, "Telefone deve ter no máximo 20 caracteres").optional().or(z.literal('')),
 });
 
 type ProfileFormData = z.infer<typeof profileSchema>;
@@ -33,11 +33,7 @@ export default function MyAccount() {
   const { data: profile } = useQuery({
     queryKey: ["my-profile", user?.id],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("user_id", user!.id)
-        .maybeSingle();
+      const { data, error } = await supabase.from("profiles").select("*").eq("user_id", user!.id).maybeSingle();
       if (error) throw error;
       return data;
     },
@@ -47,11 +43,7 @@ export default function MyAccount() {
   const { data: addresses } = useQuery({
     queryKey: ["my-addresses", user?.id],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("addresses")
-        .select("*")
-        .eq("user_id", user!.id)
-        .order("is_default", { ascending: false });
+      const { data, error } = await supabase.from("addresses").select("*").eq("user_id", user!.id).order("is_default", { ascending: false });
       if (error) throw error;
       return data;
     },
@@ -61,49 +53,28 @@ export default function MyAccount() {
   const { data: ordersCount } = useQuery({
     queryKey: ["my-orders-count", user?.id],
     queryFn: async () => {
-      const { count, error } = await supabase
-        .from("orders")
-        .select("*", { count: "exact", head: true })
-        .eq("user_id", user!.id);
+      const { count, error } = await supabase.from("orders").select("*", { count: "exact", head: true }).eq("user_id", user!.id);
       if (error) throw error;
       return count || 0;
     },
     enabled: !!user,
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ProfileFormData>({
+  const { register, handleSubmit, formState: { errors } } = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
-    values: {
-      fullName: profile?.full_name || user?.fullName || "",
-      phone: profile?.phone || "",
-    },
+    values: { fullName: profile?.full_name || user?.fullName || "", phone: profile?.phone || "" },
   });
 
   if (authLoading) {
-    return (
-      <Layout>
-        <div className="min-h-[60vh] flex items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-amber" />
-        </div>
-      </Layout>
-    );
+    return <Layout><div className="min-h-[60vh] flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-amber" /></div></Layout>;
   }
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!user) return <Navigate to="/login" replace />;
 
   const onSubmit = async (data: ProfileFormData) => {
     setIsSaving(true);
     try {
-      await updateProfile(user.id, {
-        fullName: data.fullName,
-        phone: data.phone,
-      });
+      await updateProfile(user.id, { fullName: data.fullName, phone: data.phone });
       await refreshUser();
       toast.success("Perfil atualizado com sucesso!");
     } catch {
@@ -113,25 +84,16 @@ export default function MyAccount() {
     }
   };
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/");
-  };
+  const handleSignOut = async () => { await signOut(); navigate("/"); };
 
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-display-sm font-serif mb-2">Minha Conta</h1>
-          <p className="text-muted-foreground mb-8">
-            Gerencie suas informações pessoais
-          </p>
+          <p className="text-muted-foreground mb-8">Gerencie suas informações pessoais</p>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {/* Sidebar Cards */}
             <div className="space-y-4">
               <Card>
                 <CardContent className="pt-6 text-center">
@@ -147,97 +109,53 @@ export default function MyAccount() {
 
               <Card>
                 <CardContent className="pt-6 space-y-3">
-                  <Link
-                    to="/meus-pedidos"
-                    className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <ShoppingBag className="h-4 w-4" />
-                    Meus Pedidos ({ordersCount || 0})
+                  <Link to="/meus-pedidos" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <ShoppingBag className="h-4 w-4" />Meus Pedidos ({ordersCount || 0})
                   </Link>
                   <Separator />
                   <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    Endereços ({addresses?.length || 0})
+                    <MapPin className="h-4 w-4" />Endereços ({addresses?.length || 0})
                   </div>
                   <Separator />
-                  <button
-                    onClick={handleSignOut}
-                    className="flex items-center gap-3 text-sm text-destructive hover:text-destructive/80 transition-colors w-full"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    Sair da conta
+                  <button onClick={handleSignOut} className="flex items-center gap-3 text-sm text-destructive hover:text-destructive/80 transition-colors w-full">
+                    <LogOut className="h-4 w-4" />Sair da conta
                   </button>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Profile Form */}
             <div className="md:col-span-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <User className="h-5 w-5 text-amber" />
-                    Informações Pessoais
-                  </CardTitle>
+                  <CardTitle className="flex items-center gap-2"><User className="h-5 w-5 text-amber" />Informações Pessoais</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="fullName">Nome completo</Label>
-                      <Input
-                        id="fullName"
-                        placeholder="Seu nome completo"
-                        {...register("fullName")}
-                        className={errors.fullName ? "border-destructive" : ""}
-                      />
-                      {errors.fullName && (
-                        <p className="text-sm text-destructive">
-                          {errors.fullName.message}
-                        </p>
-                      )}
+                      <Input id="fullName" maxLength={100} placeholder="Seu nome completo" {...register("fullName")} className={errors.fullName ? "border-destructive" : ""} />
+                      {errors.fullName && <p className="text-sm text-destructive">{errors.fullName.message}</p>}
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="email">E-mail</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="email"
-                          value={user.email}
-                          disabled
-                          className="pl-10 bg-muted"
-                        />
+                        <Input id="email" value={user.email} disabled className="pl-10 bg-muted" />
                       </div>
-                      <p className="text-xs text-muted-foreground">
-                        O e-mail não pode ser alterado
-                      </p>
+                      <p className="text-xs text-muted-foreground">O e-mail não pode ser alterado</p>
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="phone">Telefone</Label>
                       <div className="relative">
                         <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="phone"
-                          placeholder="(00) 00000-0000"
-                          {...register("phone")}
-                          className="pl-10"
-                        />
+                        <Input id="phone" maxLength={20} placeholder="(00) 00000-0000" {...register("phone")} className="pl-10" />
                       </div>
                     </div>
 
                     <Button type="submit" disabled={isSaving}>
-                      {isSaving ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Salvando...
-                        </>
-                      ) : (
-                        <>
-                          <Save className="mr-2 h-4 w-4" />
-                          Salvar alterações
-                        </>
-                      )}
+                      {isSaving ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Salvando...</>) : (<><Save className="mr-2 h-4 w-4" />Salvar alterações</>)}
                     </Button>
                   </form>
                 </CardContent>

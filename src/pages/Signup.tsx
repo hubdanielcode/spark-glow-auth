@@ -20,8 +20,8 @@ const signupSchema = z
       .min(2, "Nome deve ter pelo menos 2 caracteres")
       .max(100),
     email: z.string().email("E-mail inválido").max(255),
-    password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
-    confirmPassword: z.string(),
+    password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").max(128, "Senha deve ter no máximo 128 caracteres"),
+    confirmPassword: z.string().max(128),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "As senhas não coincidem",
@@ -151,6 +151,7 @@ export default function Signup() {
               <Input
                 id="fullName"
                 type="text"
+                maxLength={100}
                 placeholder="Seu nome"
                 {...register("fullName")}
                 className={errors.fullName ? "border-destructive" : ""}
@@ -167,6 +168,7 @@ export default function Signup() {
               <Input
                 id="email"
                 type="email"
+                maxLength={255}
                 placeholder="seu@email.com"
                 {...register("email")}
                 className={errors.email ? "border-destructive" : ""}
@@ -183,6 +185,7 @@ export default function Signup() {
               <Input
                 id="password"
                 type="password"
+                maxLength={128}
                 placeholder="••••••••"
                 {...register("password")}
                 className={errors.password ? "border-destructive" : ""}
@@ -199,6 +202,7 @@ export default function Signup() {
               <Input
                 id="confirmPassword"
                 type="password"
+                maxLength={128}
                 placeholder="••••••••"
                 {...register("confirmPassword")}
                 className={errors.confirmPassword ? "border-destructive" : ""}

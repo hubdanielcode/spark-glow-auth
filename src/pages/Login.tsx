@@ -14,8 +14,8 @@ import { toast } from "sonner";
 import { logError } from "@/lib/logger";
 
 const loginSchema = z.object({
-  email: z.string().email("E-mail inválido"),
-  password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
+  email: z.string().trim().email("E-mail inválido").max(255, "E-mail deve ter no máximo 255 caracteres"),
+  password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").max(128, "Senha deve ter no máximo 128 caracteres"),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -96,6 +96,7 @@ export default function Login() {
               <Input
                 id="email"
                 type="email"
+                maxLength={255}
                 placeholder="seu@email.com"
                 {...register("email")}
                 className={errors.email ? "border-destructive" : ""}
@@ -120,6 +121,7 @@ export default function Login() {
               <Input
                 id="password"
                 type="password"
+                maxLength={128}
                 placeholder="••••••••"
                 {...register("password")}
                 className={errors.password ? "border-destructive" : ""}
