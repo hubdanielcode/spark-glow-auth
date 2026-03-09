@@ -168,6 +168,7 @@ export default function Signup() {
               <Input
                 id="email"
                 type="email"
+                maxLength={255}
                 placeholder="seu@email.com"
                 {...register("email")}
                 className={errors.email ? "border-destructive" : ""}
