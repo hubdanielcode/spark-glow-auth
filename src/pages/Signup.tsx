@@ -185,6 +185,7 @@ export default function Signup() {
               <Input
                 id="password"
                 type="password"
+                maxLength={128}
                 placeholder="••••••••"
                 {...register("password")}
                 className={errors.password ? "border-destructive" : ""}
